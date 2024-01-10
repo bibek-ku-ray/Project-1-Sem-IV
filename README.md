@@ -1,2 +1,5 @@
-# Project-1-Sem-IV
- A destination and hostel booking application
+## Project-1-Sem-IV
+
+### TripTrid
+
+A web based travel management system.
