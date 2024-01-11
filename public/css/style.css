@@ -1,4 +1,18 @@
 body{
-    background-color: #666a6e;
+    background-color: #b5d9fd;
     color: aliceblue;
+}
+
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-suitcase-rolling{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
 }
