@@ -4,32 +4,29 @@ const Listing = require('../models/listing.js')
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/triptide";
 
+
+main()
+.then(()=>{
+    console.log("Connected to DB in init");
+})
+.catch((err)=>{
+    console.log("Not Connected to DB in init: ", err);
+})
+
 async function  main(){
     await mongoose.connect(MONGO_URL);
 }
 
-main()
-    .then(()=>{
-        console.log("Connected to DB in init");
-    })
-    .catch((err)=>{
-        console.log("Not Connected to DB in init: ", err);
-    })
-
-
-const intiDB = async () => {
-    try {
-        await Listing.deleteMany({})
-    } catch (error) {
-        console.log("Error while deleting in init.");
+const initDB = async () => {
+    await Listing.deleteMany({});
+ 
+    try{
+        await Listing.insertMany(initData.data);
+        console.log("data was initialized");
+    } catch(err){
+        
+        console.log(err);
     }
-
-    try {  
-        await Listing.insertMany(initData.data)
-    } catch (error) {
-        console.log("Error while inserting the data in init");
-    }
-    console.log("all data initialized in init.");
 };
 
-intiDB();
+initDB();
