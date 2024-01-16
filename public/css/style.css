@@ -102,4 +102,19 @@ body{
    
 }
 
+/* show page */
+.show-img{
+    height: 30vh;
+}
+
+.btns{
+    display: flex;
+
+}
+
+.show-card{
+    padding-right: 0;
+    padding-left: 0;
+}
+
 
