@@ -7,7 +7,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate")
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const {listingSchema} = require("./schema.js")
+const {listingSchema, reviewSchema} = require("./schema.js")
+const Review = require("./models/review.js")
 
 const app = express();
 
@@ -61,6 +62,17 @@ const validateListing = (req, res, next) => {
     }
 }
 
+const validateReview = (req, res, next) => {
+    let { error } = reviewSchema.validate(req.body)
+    // console.log(listingSchema.validate(req.body))
+    if (error){
+        let errMsg = error.details.map((errList) => errList.message).join(",");
+        throw new ExpressError(400, errMsg)
+    } else {
+        next();
+    }
+}
+
 // index route
 app.get('/listings', wrapAsync(async (req, res)=>{
     const allListing = await Listing.find({})
@@ -75,7 +87,7 @@ app.get('/listings/new', wrapAsync(async(req, res)=>{
 //show route
 app.get('/listings/:id', wrapAsync(async(req, res)=>{
     let {id} = req.params;
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findById(id).populate("reviews");
     res.render("./listing/show.ejs", {listing});
 
 }))
@@ -87,6 +99,7 @@ app.post('/listings', validateListing, wrapAsync(async(req, res, next) => {
     // console.log(result);
 
     const newListing = new Listing(req.body.listing);
+  
     await newListing.save();
     res.redirect("/listings");
     
@@ -117,6 +130,24 @@ app.delete('/listings/:id', wrapAsync(async(req, res)=>{
     console.log(deletedListing);
     res.redirect('/listings')
 }))
+
+// Review
+app.post('/listings/:id/reviews',validateReview, wrapAsync(async(req, res) => {
+    let listing = await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review)
+
+    listing.reviews.push(newReview);
+
+    await newReview.save()
+    await listing.save()
+
+    // console.log("new review saved");
+    // res.send("new review saved")
+
+    res.redirect(`/listings/${listing._id}`)
+}))
+
+
 
 app.all("*", (req, res, next)=>{
     next(new ExpressError(404, "Page Not Found!"))

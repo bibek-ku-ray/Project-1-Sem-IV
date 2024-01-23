@@ -53,8 +53,8 @@ body{
     align-items: space-evenly;
 }
 
-/* cards */
-.card{
+/* listing cards */
+.listing-card{
     border: none !important;
     margin-bottom: 2rem;
     
@@ -116,5 +116,7 @@ body{
     padding-right: 0;
     padding-left: 0;
 }
+
+
 
 
