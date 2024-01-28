@@ -8,3 +8,6 @@ A web based travel management system.
 
 ### joi
 For schema validation
+
+### passport
+For authentication, it uses **pbkdf2 hashing algorithm**
