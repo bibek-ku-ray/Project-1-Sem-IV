@@ -52,13 +52,23 @@ module.exports.editForm = async(req, res)=>{
         req.flash("error", "Listing doesn't exits!")
         res.redirect('/listings')
     }
-    res.render('./listing/edit.ejs', {listing});
+
+    let originalImage = listing.image.url;
+    originalImage = originalImage.replace("/upload", "/upload/w_250")
+    res.render('./listing/edit.ejs', {listing, originalImage});
 }
 
 module.exports.updateListing = async(req, res)=>{
 
     let {id} = req.params;
-    await Listing.findByIdAndUpdate(id, {...req.body.listing})
+    let listing = await Listing.findByIdAndUpdate(id, {...req.body.listing})
+
+    if(typeof req.file !== "undefined"){
+        let url = req.file.path;
+        let filename = req.file.filename;
+        listing.image = {url, filename}
+        await listing.save();
+    }
     req.flash("success", "Listing Updated!")
     res.redirect(`/listings/${id}`)
 
