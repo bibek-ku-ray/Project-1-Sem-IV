@@ -54,7 +54,7 @@ const sessionOption = {
 }
 
 app.get('/', function(req, res){
-    res.send("Hello bibek")
+    res.send("Hey Bibek")
 });
 
 app.use(session(sessionOption))
