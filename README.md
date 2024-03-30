@@ -4,7 +4,7 @@
 
 A web based travel management system.
 
-## nmp Package used
+## npm Package used
 
 ### joi
 
@@ -13,3 +13,6 @@ For schema validation
 ### passport
 
 For authentication, it uses **pbkdf2 hashing algorithm**
+
+## Run app
+npx nodemon app.js
