@@ -123,5 +123,23 @@ body{
     width: 65vh;
 }
 
+/* booking */
 
+.pay-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+    
+}
+
+.booking-cancel{
+    display: flex;
+    gap: 3em;
+}
+
+.booking-div{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+
+}
 

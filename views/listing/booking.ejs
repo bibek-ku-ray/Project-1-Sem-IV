@@ -1,0 +1,45 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row">
+  <div class="col-8 offset-2 mt-3">
+    <h3>Book Your Destination</h3>
+<div class="booking-div">
+
+
+    <form method="POST" action="">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" name="booking[name]" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label for="checkIn" class="form-label">Check-in Date</label>
+        <input
+          type="date"
+          name="checkIn"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="checkOut" class="form-label">Check-out Date</label>
+        <input
+          type="date"
+          name="checkOut"
+          class="form-control"
+          required
+        />
+      </div>
+
+      
+      <input type="submit" value="Pay Now" class="btn btn-primary pay-btn"/>
+      <!-- <button type="submit" class="btn btn-primary pay-btn">Pay Now</button> -->
+    </form>
+
+
+    <div class="booking-cancel">
+      <form method="get" action="/listings">
+        <button class="btn btn-dark offset-1">Cancel</button>
+      </form>
+    </div>
+  </div>
+  </div>
+</div>
